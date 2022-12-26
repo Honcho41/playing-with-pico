@@ -60,7 +60,7 @@ for i in range(0, bpl):
     baubles.append(
         Bauble(
             random.randint(dx, WIDTH - dx),
-            random.randint(HEIGHT - dy, HEIGHT),
+            random.randint(HEIGHT - dy, HEIGHT - maxr),
             random.randint(minr,maxr),
             random.randint(-2,2)
         ))
