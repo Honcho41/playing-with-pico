@@ -26,7 +26,7 @@ green = display.create_pen(11, 255, 3)
 blue = display.create_pen(3, 19, 255)
 
 # list of colours to randomly iterate through later
-colours = [star, white, red, green, blue]
+colours = [star, white, red, green, blue, warmwhite]
 
 # the tree is split into 4 layers which decrese
 # in width with each layer
