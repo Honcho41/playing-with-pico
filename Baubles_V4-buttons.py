@@ -17,8 +17,10 @@ button_y = Button(15)
 
 # set the colours
 BG = display.create_pen(0,0,0)
+BLACK = display.create_pen(0, 0, 0)
 star = display.create_pen(250, 250, 25)
 white = display.create_pen(255, 255, 255)
+warmwhite = display.create_pen(252, 234, 177)
 red = display.create_pen(255, 0, 0)
 green = display.create_pen(11, 255, 3)
 blue = display.create_pen(3, 19, 255)
@@ -66,7 +68,7 @@ for i in range(0, bpl):
     baubles.append(
         Bauble(
             random.randint(dx, WIDTH - dx),
-            random.randint(HEIGHT - dy, HEIGHT),
+            random.randint(HEIGHT - dy, HEIGHT - maxr),
             random.randint(minr,maxr),
             random.randint(-2,2)
         ))
@@ -99,10 +101,18 @@ for i in range(bpl*3, bpl*4):
             random.randint(minr,maxr),
             random.randint(-2,2),
         ))
+    
+# sets up a handy function we can call to clear the screen
+def clear():
+    display.set_pen(BLACK)
+    display.clear()
+    display.update()
+
 #main program
 while True:
     
     if button_a.read():
+        clear()
         while True:
             display.set_pen(BG)
             display.clear()
@@ -110,7 +120,7 @@ while True:
             # draw the star
             display.set_pen(star)    
             display.polygon([
-              (mid, top-20),
+              (mid, top-25),
               (mid+4, top-16),
               (mid+10, top-14),
               (mid+4, top-10),
@@ -132,10 +142,14 @@ while True:
                   
             display.update()
             time.sleep(0.2)
+            if button_a.read() or button_b.read() or button_x.read() or button_y.read():
+                clear()
+                break
             
         time.sleep(0.1)
         
     elif button_b.read():
+        clear()
         while True:
             
             display.set_pen(BG)
@@ -179,8 +193,60 @@ while True:
             display.update()
             # short time delay to immitate twinkling
             time.sleep(0.08)
+            if button_a.read() or button_b.read() or button_x.read() or button_y.read():
+                clear()
+                break
         
         time.sleep(0.1)
+    
+    elif button_x.read():
+        clear()
+        while True:
+            
+            display.set_pen(BG)
+            display.clear()
+            
+            # draw the star
+            display.set_pen(star)  
+            display.polygon([
+              (mid, top-20),
+              (mid+3, top-16),
+              (mid+9, top-14),
+              (mid+3, top-10),
+              (mid, top+7),
+              (mid-3, top-10),
+              (mid-9, top-14),
+              (mid-3, top-16)
+               
+            ])
+
+            # iterate through list of baubles and draw them
+            for bauble in baubles:
+                
+                display.set_pen(warmwhite)
+                display.circle(int(bauble.x), int(bauble.y), int(bauble.r))
+            
+            # push to display
+            display.update()
+            
+            # set variables to select random baubles to twinkle
+            num = bpl*4
+            tw = [random.choice(baubles) for _ in range(num)]
+            
+            # iterate through randomly selected baubles and make them twinkle
+            for bauble in tw:
+                
+                twinkle = bauble.r + bauble.dr
+                display.set_pen(warmwhite)
+                display.circle(int(bauble.x), int(bauble.y), int(twinkle))
+            
+            # push to display
+            display.update()
+            # short time delay to immitate twinkling
+            time.sleep(0.08)
+            if button_a.read() or button_b.read() or button_x.read() or button_y.read():
+                clear()
+                break
         
     time.sleep(0.1)
 
