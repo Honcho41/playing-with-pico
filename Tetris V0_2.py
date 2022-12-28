@@ -13,7 +13,7 @@ height = picoscroll.get_height()
 gameboard = []
 
 
-shape_height = 17
+shape_height = 16
 shape_width = 3
     
 def Create_game_board():
@@ -23,7 +23,7 @@ def Create_game_board():
     #y = height = 7
     global gameboard
     gameboard = [[0, 0, 0, 1, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 1, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
@@ -60,7 +60,7 @@ def move_left():
             shape_row[i] = shape_row[i+1] # not plus 1, simply changed to equal the index to the left of it.
     shape_row[6] = 0
     read_array()
-    #print(shape_row)
+    print(shape_row)
 
 
 def move_right():
@@ -74,9 +74,7 @@ def move_right():
         for i in range(6,0,-1):
             shape_row[i] = shape_row[i-1]
     shape_row[0] = 0
-    read_array()
-    #print(shape_row)
-    
+    read_array()    
 
 def read_array():
     global gameboard
@@ -109,7 +107,7 @@ def Game():
             while(picoscroll.is_pressed(picoscroll.BUTTON_X) == True):
                 this = True
         #print(gameboard[14])
-        print(shape_height)
+        #print(shape_height)
         
         read_array()
         picoscroll.update()

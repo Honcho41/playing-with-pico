@@ -81,6 +81,7 @@ def falling():
         print("height = " + str(height)," width = " + str(width) +"\n")
         print("x = " + str(pixx), " y = " + str(pixy))
 
+
 # start the falling function
 _thread.start_new_thread(falling,())
 
